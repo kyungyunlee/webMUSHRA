@@ -1,0 +1,47 @@
+# test config AB test, waveform, 3 conditions, no looping
+
+
+testname: TP evaluation
+testId: tp_eval
+bufferSize: 2048
+stopOnErrors: true
+showButtonPreviousPage: true
+remoteService: service/write.php
+
+
+pages:
+
+    - type: 3AFC
+      id: model1
+      name: Mono Trial AB
+      unforced:
+      content: test description AB
+      showWaveform: false
+      enableLooping: false 
+      stimuli:
+          original1: configs/resources/testing/P1 - Set 1 - 1.wav
+          original2: configs/resources/testing/P1 - Set 1 - 1.wav
+          generated: configs/resources/testing/P2 - Set 1 - 1.wav
+    
+    - type: 3AFC
+      id: model2
+      name: Mono Trial AB
+      unforced:
+      content: test description AB
+      showWaveform: false
+      enableLooping: false 
+      stimuli:
+          original1: configs/resources/testing/P3 - Native - 1 (French).wav
+          original2: configs/resources/testing/P3 - Native - 1 (French).wav
+          generated: configs/resources/testing/P1 - Set 1 - 1.wav
+
+
+
+    - type: finish
+      name: Thank you
+      content: Thank you for attending
+      popupContent: Your results were sent. Goodbye and have a nice day
+      showResults: false
+      writeResults: true
+
+

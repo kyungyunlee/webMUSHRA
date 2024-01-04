@@ -105,6 +105,10 @@ function addPagesToPageManager(_pageManager, _pages) {
       } else if (pageConfig.type == "finish") {
         var finishPage = new FinishPage(_pageManager, session, dataSender, pageConfig, config.language);
         _pageManager.addPage(finishPage);
+      } else if (pageConfig.type == "3AFC") {
+        var pcPageManager = new ThreeAFCPageManager();
+        pcPageManager.createPages(_pageManager, pageTemplateRenderer, pageConfig, audioContext, config.bufferSize, audioFileLoader, session, errorHandler, config.language);
+        pcPageManager = null;
       } else {
 
         errorHandler.sendError("Type not specified.");

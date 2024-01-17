@@ -285,60 +285,60 @@ if($write_lms){
 //lss
 
 
-$write_lss = false;
-$lssCSVdata = array();
-// array_push($lssCSVdata, array("session_test_id", "participant_email", "participant_age", "participant_gender", "trial_id", "stimuli_rating", "stimuli", "rating_time"));
+// $write_lss = false;
+// $lssCSVdata = array();
+// // array_push($lssCSVdata, array("session_test_id", "participant_email", "participant_age", "participant_gender", "trial_id", "stimuli_rating", "stimuli", "rating_time"));
 
-$input = array("session_test_id");
-for($i =0; $i < $length; $i++){
-	array_push($input, $session->participant->name[$i]);
-}
-array_push($input,  "trial_id");
-$ratingCount = count($session->trials[0]->responses[0]->stimulusRating);
-if($ratingCount > 1) {
-    for($i =0; $i < $ratingCount; $i++){
-        array_push($input, "stimuli_rating" . ($i+1));
-    }
-} else {
-    array_push($input, "stimuli_rating");
-}
-array_push($input, "stimuli", "rating_time");
-array_push($lssCSVdata, $input);
+// $input = array("session_test_id");
+// for($i =0; $i < $length; $i++){
+// 	array_push($input, $session->participant->name[$i]);
+// }
+// array_push($input,  "trial_id");
+// $ratingCount = count($session->trials[0]->responses[0]->stimulusRating);
+// if($ratingCount > 1) {
+//     for($i =0; $i < $ratingCount; $i++){
+//         array_push($input, "stimuli_rating" . ($i+1));
+//     }
+// } else {
+//     array_push($input, "stimuli_rating");
+// }
+// array_push($input, "stimuli", "rating_time");
+// array_push($lssCSVdata, $input);
 
-foreach($session->trials as $trial) {
+// foreach($session->trials as $trial) {
 	
-	if($trial->type == "likert_single_stimulus") {
-		foreach ($trial->responses as $response) {
-			$write_lss = true; 
+// 	if($trial->type == "likert_single_stimulus") {
+// 		foreach ($trial->responses as $response) {
+// 			$write_lss = true; 
 			
-				$results = array($session->testId);
-			for($i =0; $i < $length; $i++){
-				array_push($results, $session->participant->response[$i]);
-			}
-            array_push($results, $trial->id);
-            $results = array_merge($results, $response->stimulusRating);
-            array_push($results, $response->stimulus, $response->time);
+// 				$results = array($session->testId);
+// 			for($i =0; $i < $length; $i++){
+// 				array_push($results, $session->participant->response[$i]);
+// 			}
+//             array_push($results, $trial->id);
+//             $results = array_merge($results, $response->stimulusRating);
+//             array_push($results, $response->stimulus, $response->time);
 		  
-		  	array_push($lssCSVdata, $results); 
+// 		  	array_push($lssCSVdata, $results); 
 			
-			// array_push($lssCSVdata, array($session->testId, $session->participant->email, $session->participant->age, $session->participant->gender, $trial->id, " $response->stimulusRating ", $response->stimulus, $response->time));
-		}
-	}
-}
+// 			// array_push($lssCSVdata, array($session->testId, $session->participant->email, $session->participant->age, $session->participant->gender, $trial->id, " $response->stimulusRating ", $response->stimulus, $response->time));
+// 		}
+// 	}
+// }
 
-if($write_lss){
-	$filename = $filepathPrefix."lss".$filepathPostfix;
-	$isFile = is_file($filename); 
-	$fp = fopen($filename, 'a');
-	foreach($lssCSVdata as $row){
-		if ($isFile){
-			$isFile = false; 
-		} else {
-			fputcsv($fp,$row);
-		}
-	}
-	fclose($fp);
-}
+// if($write_lss){
+// 	$filename = $filepathPrefix."lss".$filepathPostfix;
+// 	$isFile = is_file($filename); 
+// 	$fp = fopen($filename, 'a');
+// 	foreach($lssCSVdata as $row){
+// 		if ($isFile){
+// 			$isFile = false; 
+// 		} else {
+// 			fputcsv($fp,$row);
+// 		}
+// 	}
+// 	fclose($fp);
+// }
 
 //spatial
 //localization

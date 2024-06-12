@@ -18,11 +18,11 @@ pages:
       content: test description AB
       showWaveform: true
       enableLooping: false 
-      reference: configs/resources/audio/mono_ref.wav
+      reference: configs/resources/testing/P1 - Set 1 - 1.wav
       stimuli:
-          C1: configs/resources/audio/mono_c1.wav
-          C2: configs/resources/audio/mono_c2.wav
-          C3: configs/resources/audio/mono_c3.wav
+          C1: configs/resources/testing/P3 - Native - 1 (French).wav
+          # C2: configs/resources/audio/mono_c2.wav
+          # C3: configs/resources/audio/mono_c3.wav
 
 
     - type: finish

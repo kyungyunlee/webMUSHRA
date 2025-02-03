@@ -189,6 +189,56 @@ if ($write_pc) {
 
 
 
+// 3AFC_RV
+
+$write_pc = false;
+$pcCsvData = array();
+// array_push($pcCsvData, array("session_test_id", "participant_email", "participant_age", "participant_gender", "trial_id", "choice_reference", "choice_non_reference", "choice_answer", "choice_time", "choice_comment"));
+
+$input = array("session_test_id");
+for($i =0; $i < $length; $i++){
+	array_push($input, $session->participant->name[$i]);
+}
+array_push($input, "trial_id", "choice_answer", "choice_time", "choice_comment");
+array_push($pcCsvData, $input);
+
+
+
+foreach ($session->trials as $trial) {
+  if ($trial->type == "3AFC_RV") {
+	  foreach ($trial->responses as $response) {	  	
+	  	$write_pc = true;
+		  
+		 
+		$results = array($session->testId);
+		for($i =0; $i < $length; $i++){
+			array_push($results, $session->participant->response[$i]);
+		}  
+		array_push($results, $trial->id, $response->answer, $response->time, $response->comment);
+	  
+	  	array_push($pcCsvData, $results); 
+		  
+		  
+	    // array_push($pcCsvData, array($session->testId, $session->participant->email, $session->participant->age, $session->participant->gender, $trial->id, $response->reference, $response->nonReference, $response->answer, $response->time, $response->comment));    
+	  }
+  }
+}
+
+if ($write_pc) {
+	$filename = $filepathPrefix."3AFC_RV".$filepathPostfix;
+	$isFile = is_file($filename);
+	$fp = fopen($filename, 'a');
+	foreach ($pcCsvData as $row) {
+		if ($isFile) {	    	
+			$isFile = false;
+		} else {
+		   fputcsv($fp, $row);
+		}
+	}
+	fclose($fp);
+}
+
+
 
 // bs1116
 

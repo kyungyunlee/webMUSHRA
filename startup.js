@@ -109,8 +109,11 @@ function addPagesToPageManager(_pageManager, _pages) {
         var pcPageManager = new ThreeAFCPageManager();
         pcPageManager.createPages(_pageManager, pageTemplateRenderer, pageConfig, audioContext, config.bufferSize, audioFileLoader, session, errorHandler, config.language);
         pcPageManager = null;
+      } else if (pageConfig.type == "3AFC_RV") {
+        var pcPageManager = new RealVirtualThreeAFCPageManager();
+        pcPageManager.createPages(_pageManager, pageTemplateRenderer, pageConfig, audioContext, config.bufferSize, audioFileLoader, session, errorHandler, config.language);
+        pcPageManager = null;
       } else {
-
         errorHandler.sendError("Type not specified.");
 
       }
